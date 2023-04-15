@@ -3,7 +3,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "NotFoundPage",
+};
 </script>
 
 <style></style>
