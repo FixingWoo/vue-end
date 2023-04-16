@@ -2,31 +2,47 @@
   <form @submit.prevent="submitForm">
     <div>
       <label for="username">id:</label>
-      <input type="text" id="username" v-model="submitData.id" />
+      <input type="text" id="username" v-model="username" />
     </div>
     <div>
       <label for="password">pw:</label>
-      <input type="text" id="password" v-model="submitData.pw" />
+      <input type="text" id="password" v-model="password" />
     </div>
     <div>
       <label for="nickname">nickname</label>
-      <input type="text" id="nickname" v-model="submitData.nickname" />
+      <input type="text" id="nickname" v-model="nickname" />
     </div>
-    <button type="submit">Login</button>
+    <button type="submit">회원 가입</button>
+    <p>{{ logMessage }}</p>
   </form>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { registerUser } from "@/api/index";
 
-const submitData = ref({
-  id: null,
-  pw: null,
-  nickname: null,
-});
+const username = ref("");
+const password = ref("");
+const nickname = ref("");
+const logMessage = ref("");
 
-const submitForm = () => {
-  console.log(submitData);
+const submitForm = async () => {
+  const data = {
+    username: username.value,
+    password: password.value,
+    nickname: nickname.value,
+  };
+
+  const response = await registerUser(data);
+  console.log(response);
+  logMessage.value = `${response.data.username}님이 가입되셨습니다.`;
+  initForm();
+};
+
+const initForm = () => {
+  username.value = "";
+  password.value = "";
+  nickname.value = "";
 };
 </script>
 
