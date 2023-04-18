@@ -27,15 +27,15 @@ const nickname = ref("");
 const logMessage = ref("");
 
 const submitForm = async () => {
-  const data = {
+  const submitData = {
     username: username.value,
     password: password.value,
     nickname: nickname.value,
   };
 
-  const response = await registerUser(data);
-  console.log(response);
-  logMessage.value = `${response.data.username}님이 가입되셨습니다.`;
+  const { data } = await registerUser(submitData);
+  console.log(data);
+  logMessage.value = `${data.username}님이 가입되셨습니다.`;
   initForm();
 };
 
