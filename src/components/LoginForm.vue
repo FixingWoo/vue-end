@@ -19,6 +19,8 @@
 import { computed, ref } from "vue";
 import { loginUser } from "@/api/index";
 import { validateEmail } from "@/utils/validation";
+import routes from "@/routes";
+import store from "@/store";
 
 const username = ref("");
 const password = ref("");
@@ -39,10 +41,11 @@ const submitForm = async () => {
     const { data } = await loginUser(submitData);
     console.log(data);
     logMessage.value = `${data.user.username}님 환영합니다`;
+    store.commit("setUsername", data.user.username);
+    routes.push("/main");
   } catch (error) {
     // 에러 핸들링
     console.log(error.response);
-    logMessage.value = `${error.response.data}`;
   } finally {
     initForm();
   }
