@@ -39,8 +39,7 @@ const submitForm = async () => {
     };
 
     const { data } = await loginUser(submitData);
-    console.log(data);
-    logMessage.value = `${data.user.username}님 환영합니다`;
+    store.commit("setToken", data.token);
     store.commit("setUsername", data.user.username);
     routes.push("/main");
   } catch (error) {
