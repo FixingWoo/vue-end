@@ -18,4 +18,8 @@ function loginUser(data) {
   return instance.post("login", data);
 }
 
-export { registerUser, loginUser };
+function fetchPosts() {
+  return instance.get("posts");
+}
+
+export { registerUser, loginUser, fetchPosts };
