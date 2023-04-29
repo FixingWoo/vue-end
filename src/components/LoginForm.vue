@@ -17,7 +17,6 @@
 
 <script setup>
 import { computed, ref } from "vue";
-import { loginUser } from "@/api/index";
 import { validateEmail } from "@/utils/validation";
 import routes from "@/routes";
 import store from "@/store";
@@ -38,9 +37,7 @@ const submitForm = async () => {
       password: password.value,
     };
 
-    const { data } = await loginUser(submitData);
-    store.commit("setToken", data.token);
-    store.commit("setUsername", data.user.username);
+    await store.dispatch("LOGIN", submitData);
     routes.push("/main");
   } catch (error) {
     // 에러 핸들링
