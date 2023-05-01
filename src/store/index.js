@@ -6,14 +6,14 @@ import {
   saveAuthToCookie,
   saveUserToCookie,
 } from "@/utils/cookies";
-import { loginUser } from "@/api/index";
+import { loginUser } from "@/api/auth";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    token: getAuthFromCookie || "",
-    username: getUserFromCookie || "",
+    token: getAuthFromCookie() || "",
+    username: getUserFromCookie() || "",
   },
   getters: {
     // 상태 변경시 수행
@@ -37,6 +37,8 @@ export default new Vuex.Store({
       const { data } = await loginUser(submitData);
       commit("setToken", data.token);
       commit("setUsername", data.user.username);
+
+      console.log(data);
       saveAuthToCookie(data.token);
       saveUserToCookie(data.user.username);
       return data;

@@ -9,11 +9,12 @@
         :post="post"
       ></PostListItem>
     </ul>
+    <router-link to="/add" class="create-button"> + </router-link>
   </div>
 </template>
 <script setup>
 import PostListItem from "@/components/posts/PostListItem.vue";
-import { fetchPosts } from "@/api/index";
+import { fetchPosts } from "@/api/posts";
 import { onMounted, reactive } from "vue";
 
 const state = reactive({
