@@ -17,6 +17,7 @@
 import { computed } from "vue";
 import store from "@/store";
 import routes from "@/routes";
+import { deleteCookie } from "@/utils/cookies";
 
 const isLogin = computed(() => {
   return store.getters.isLogin;
@@ -29,6 +30,9 @@ const username = computed(() => {
 
 const logout = () => {
   store.commit("clearUsername");
+  store.commit("clearToken");
+  deleteCookie("til_auth");
+  deleteCookie("til_user");
   routes.push("/login");
 };
 </script>
