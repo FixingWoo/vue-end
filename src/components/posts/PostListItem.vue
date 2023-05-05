@@ -14,7 +14,7 @@
   </li>
 </template>
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, defineEmits } from "vue";
 import { deletePost } from "@/api/posts";
 
 const props = defineProps({
@@ -23,6 +23,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+const emit = defineEmits(["refresh"]);
 
 const deleteItem = async () => {
   if (confirm("삭제하시겠습니까?")) {

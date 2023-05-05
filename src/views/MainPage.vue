@@ -7,6 +7,7 @@
         v-for="post in state.posts"
         :key="post._id"
         :post="post"
+        @refresh="fetchPostsData"
       ></PostListItem>
     </ul>
     <router-link to="/add" class="create-button"> + </router-link>
